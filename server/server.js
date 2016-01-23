@@ -1,9 +1,16 @@
 var express = require('express');
+var bodyParser = require('body-parser');
+var path = require('path');
 var index = require('./routes/index');
+var api = require('./routes/api');
+
 var app = express();
+
+app.use(bodyParser.json());
 
 app.use(express.static('server/public'));
 
+app.use('/api', api);
 app.use('/', index);
 
 

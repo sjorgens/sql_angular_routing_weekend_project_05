@@ -13,7 +13,16 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
     $locationProvider.html5Mode(true);     //needed to remove #'s from HTML links to access controllers
 }]);
 
-app.controller('AddressDisplay', ['$scope', function($scope){
+app.controller('AddressDisplay', ['$scope', '$http', function($scope, $http){
+    $scope.allUsers = [];
+
+    $scope.getUsers = function(){
+        //console.log('getUsers function started...');
+        $http.get('/api/pullAllUsers').success(function(response){
+            console.log(response);
+            $scope.allUsers = response;
+        });
+    };
 
 }]);
 
