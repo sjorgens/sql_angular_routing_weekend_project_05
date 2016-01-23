@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="routeApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Angular Routing</title>
+    <script src="vendor/angular/angular.min.js"></script>
+    <script src="vendor/angular-route/angular-route.min.js"></script>
+    <script src="assets/scripts/client.min.js"></script>
+    <base href="/">                 <!--needed to remove #'s in href's below -->
+</head>
+<body ng-controller="AddressDisplay" ng-controller="OrderLookup">
+
+    <!--<a href="#/addressdisplay"><button class="btn btn-info btn-lg btn-md btn-sm">Address Display</button></a>-->
+    <!--<a href="#/orderlookup"><button class="btn btn-info btn-lg btn-md btn-sm">Order Lookup</button></a>-->
+    <a href="/addressdisplay"><button class="btn btn-info btn-lg btn-md btn-sm">Address Display</button></a>
+    <a href="/orderlookup"><button class="btn btn-info btn-lg btn-md btn-sm">Order Lookup</button></a>
+
+    <ng-view>
+
+    </ng-view>
+
+</body>
+</html>
