@@ -8,10 +8,18 @@
 <form  ng-submit="getUserAddresses()">
     <div>
         <label>User:
-            <select ng-model="allUsers.name"
+            <select ng-model="allUsers.id"
                     ng-options="obj.id as obj.name for obj in allUsers">
             </select>
             <input type="submit" id="submit" value="Submit" />
         </label>
+    </div>
+    <div>
+        <ul>
+            <li ng-repeat="address in userAddresses">
+                Name: {{address.name}}</br>
+                Street: {{address.address_street}}
+            </li>
+        </ul>
     </div>
 </form>

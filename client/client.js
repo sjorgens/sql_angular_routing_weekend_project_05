@@ -1,8 +1,8 @@
 var app = angular.module('routeApp', ['ngRoute']);
 
 //Global variables for testing purposes
-var USERID = 1;
-var ARRAYPOSITION = 0;
+//var USERID = 1;
+//var ARRAYPOSITION = 0;
 
 app.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider){   //$locationProvider needed to remove #'s in HTML to access controller links
     $routeProvider
@@ -22,21 +22,26 @@ app.controller('AddressDisplay', ['$scope', '$http', function($scope, $http){
     $scope.userAddresses = [];
 
     $scope.getUsers = function(){
+        //testing purposes
         //console.log('getUsers function started...');
+
         $http.get('/api/pullAllUsers').success(function(response){
             //console.log(response);
             $scope.allUsers = response;
 
-            console.log('Username: ', $scope.allUsers[ARRAYPOSITION].name);
-            USERID = $scope.allUsers[ARRAYPOSITION].id;
-
-            //comment out for testing
+            //testing purposes
+            //console.log('Username: ', $scope.allUsers[ARRAYPOSITION].name);
+            //USERID = $scope.allUsers[ARRAYPOSITION].id;
             //getUserAddresses();
         });
     };
 
-    $scope.getUserAddresses = function(id) {
-        console.log('getUserAddresses function started...');
+    $scope.getUserAddresses = function() {
+
+        var id = $scope.allUsers.id;
+
+        //testing purposes
+        //console.log('getUserAddresses function started...');
 
         $http.get('/api/pullUserAddresses/' + id).success(function(response){
             $scope.userAddresses = response;
@@ -49,4 +54,3 @@ app.controller('AddressDisplay', ['$scope', '$http', function($scope, $http){
 app.controller('OrderLookup', ['$scope', function($scope){
 
 }]);
-
