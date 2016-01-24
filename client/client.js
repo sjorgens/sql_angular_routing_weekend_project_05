@@ -20,8 +20,30 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
 app.controller('AddressDisplay', ['$scope', '$http', function($scope, $http){
     $scope.allUsers = [];
     $scope.userAddresses = [];
+    var id = null;
 
-    $scope.getUsers = function(){
+    getUsers();
+
+    $scope.getUserAddresses = function() {
+
+        var id = $scope.allUsers.id;
+
+        //testing purposes
+        //console.log('getUserAddresses function started...');
+
+        if (id != null) {
+            console.log('User id ' + id + ' selected...');
+            $http.get('/api/pullUserAddresses/' + id).success(function(response){
+                $scope.userAddresses = response;
+
+                console.log('Username Address: ', $scope.userAddresses);
+            });
+        }else{
+            alert('No user was selected.  Please select a user to continue.');
+        }
+    }
+
+    function getUsers(){
         //testing purposes
         //console.log('getUsers function started...');
 
@@ -36,19 +58,6 @@ app.controller('AddressDisplay', ['$scope', '$http', function($scope, $http){
         });
     };
 
-    $scope.getUserAddresses = function() {
-
-        var id = $scope.allUsers.id;
-
-        //testing purposes
-        //console.log('getUserAddresses function started...');
-
-        $http.get('/api/pullUserAddresses/' + id).success(function(response){
-            $scope.userAddresses = response;
-
-            console.log('Username Address: ', $scope.userAddresses);
-        });
-    }
 }]);
 
 app.controller('OrderLookup', ['$scope', function($scope){
