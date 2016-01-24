@@ -34,7 +34,7 @@ router.get('/pullAllUsers', function(request, response){
 });
 
 router.get('/pullUserAddresses/:id', function(request, response){
-
+    //testing purposes
     //console.log('pullUserAddresses api call initiated...');
 
     var addresses = [];
@@ -55,9 +55,32 @@ router.get('/pullUserAddresses/:id', function(request, response){
             client.end();
             return response.json(addresses);
         });
-
     });
+});
 
+router.get('/pullUserOrders/:id', function(request, response){
+    //testing purposes
+    //console.log('pullUserOrders api call initiated...');
+
+    var orders = [];
+
+    pg.connect(connectionString, function(error, client){
+
+        if(error){
+            console.log(error);
+        }
+
+        var query = client.query("SELECT users.name, addresses.*, orders.* FROM users INNER JOIN orders ON users.id = orders.user_id INNER JOIN addresses ON orders.ship_address_id = addresses.address_id WHERE users.id = " + [request.params.id]);
+
+        query.on('row', function(row){
+            orders.push(row);
+        });
+
+        query.on('end', function(){
+            client.end();
+            return response.json(orders);
+        });
+    });
 });
 
 module.exports = router;

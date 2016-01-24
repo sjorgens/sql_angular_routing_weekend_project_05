@@ -1,1 +1,27 @@
 <p>Select a user and date range.  Then display all the orders for this user within the date range given in a table.  Blow out the data to display: all orders fields; include address street, city, state, and zip for the order; include user's name.  Then sum the total amount spent at the bottom for only the selected orders.  Amount fields must have a dollar sign and proper commas and formatting.</p>
+
+<form ng-submit="getUserOrders()">
+    <div>
+        <label>User:
+            <select ng-model="allUsers.id"
+                    ng-options="obj.id as obj.name for obj in allUsers">
+            </select>
+            <input type="submit" id="submit" value="Submit" />
+        </label>
+    </div>
+    <div>
+        <ul>
+            <li ng-repeat="order in userOrders">
+                Shipping Address:</br>
+                {{order.address_street}}</br>
+                {{order.address_city}}, {{order.address_state}} &nbsp {{order.address_zip}}</br>
+                </br>
+                <ul>
+                    <li>Order Number: {{order.order_id}}</li>
+                    <li>Order Date: {{order.order_date}}</li>
+                    <li>Order Amount: {{order.amount}}</li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</form>

@@ -32,11 +32,14 @@ app.controller('AddressDisplay', ['$scope', '$http', function($scope, $http){
         //console.log('getUserAddresses function started...');
 
         if (id != null) {
-            console.log('User id ' + id + ' selected...');
+            //testing purposes
+            //console.log('User id ' + id + ' selected...');
+
             $http.get('/api/pullUserAddresses/' + id).success(function(response){
                 $scope.userAddresses = response;
 
-                console.log('Username Address: ', $scope.userAddresses);
+                //testing purposes
+                //console.log('User Addresses: ', $scope.userAddresses);
             });
         }else{
             alert('No user was selected.  Please select a user to continue.');
@@ -57,9 +60,46 @@ app.controller('AddressDisplay', ['$scope', '$http', function($scope, $http){
             //getUserAddresses();
         });
     };
-
 }]);
 
-app.controller('OrderLookup', ['$scope', function($scope){
+app.controller('OrderLookup', ['$scope', '$http', function($scope, $http){
+    $scope.allUsers = [];
+    $scope.userOrders = [];
+    var id = null;
 
+    //testing purposes
+    console.log('OrderLookup Controller initiated...');
+
+    getUsers();
+
+    $scope.getUserOrders = function() {
+
+        var id = $scope.allUsers.id;
+
+        //testing purposes
+        //console.log('getUserOrders function started...');
+
+        if (id != null) {
+            //testing purposes
+            //console.log('User id ' + id + ' selected...');
+
+            $http.get('/api/pullUserOrders/' + id).success(function(response){
+                $scope.userOrders = response;
+
+                //testing purposes
+                console.log('User Orders: ', $scope.userOrders);
+            });
+        }else{
+            alert('No user was selected.  Please select a user to continue.');
+        }
+    }
+
+    function getUsers(){
+
+        $http.get('/api/pullAllUsers').success(function(response){
+            //console.log(response);
+            $scope.allUsers = response;
+
+        });
+    };
 }]);
