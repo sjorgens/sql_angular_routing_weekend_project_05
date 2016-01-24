@@ -33,7 +33,7 @@ router.get('/pullAllUsers', function(request, response){
 
 });
 
-router.get('/pullUserAddresses/:USERID', function(request, response){
+router.get('/pullUserAddresses/:id', function(request, response){
 
     //console.log('pullUserAddresses api call initiated...');
 
@@ -45,7 +45,7 @@ router.get('/pullUserAddresses/:USERID', function(request, response){
             console.log(error);
         }
 
-        var query = client.query("SELECT users.name, addresses.* FROM users JOIN addresses ON users.id = addresses.user_id WHERE users.id = " + [request.params.USERID]);
+        var query = client.query("SELECT users.name, addresses.* FROM users JOIN addresses ON users.id = addresses.user_id WHERE users.id = " + [request.params.id]);
 
         query.on('row', function(row){
             addresses.push(row);

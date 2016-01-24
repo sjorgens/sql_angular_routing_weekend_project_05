@@ -2,9 +2,16 @@
 
 <div>
     <button ng-click="getUsers()">Get All Users</button>
+    <br>
 </div>
 
-<div>
-    <!--<dropdown placeholder="Username..." list="allNames" selected="userName" property=""></dropdown>-->
-
-</div>
+<form  ng-submit="getUserAddresses()">
+    <div>
+        <label>User:
+            <select ng-model="allUsers.name"
+                    ng-options="obj.id as obj.name for obj in allUsers">
+            </select>
+            <input type="submit" id="submit" value="Submit" />
+        </label>
+    </div>
+</form>
