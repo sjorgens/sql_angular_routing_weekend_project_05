@@ -58,9 +58,10 @@ router.get('/pullUserAddresses/:id', function(request, response){
     });
 });
 
-router.get('/pullUserOrders/:id', function(request, response){
+router.get('/pullUserOrders/:id/:startDate/:endDate', function(request, response){
     //testing purposes
-    //console.log('pullUserOrders api call initiated...');
+    //console.log('Start Date...', request.params.startDate);
+    //console.log('End Date...', request.params.endDate);
 
     var orders = [];
 
@@ -70,7 +71,8 @@ router.get('/pullUserOrders/:id', function(request, response){
             console.log(error);
         }
 
-        var query = client.query("SELECT users.name, addresses.*, orders.* FROM users INNER JOIN orders ON users.id = orders.user_id INNER JOIN addresses ON orders.ship_address_id = addresses.address_id WHERE users.id = " + [request.params.id]);
+        //testing purposes
+        var query = client.query("SELECT users.name, addresses.*, orders.* FROM users INNER JOIN orders ON users.id = orders.user_id INNER JOIN addresses ON orders.ship_address_id = addresses.address_id WHERE orders.user_id = $1 AND orders.order_date BETWEEN $2 AND $3", [request.params.id, request.params.startDate, request.params.endDate]);
 
         query.on('row', function(row){
             orders.push(row);
@@ -80,6 +82,7 @@ router.get('/pullUserOrders/:id', function(request, response){
             client.end();
             return response.json(orders);
         });
+
     });
 });
 

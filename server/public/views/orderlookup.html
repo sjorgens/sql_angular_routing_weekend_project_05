@@ -1,4 +1,4 @@
-<p>Select a user and date range.  Then display all the orders for this user within the date range given in a table.  Blow out the data to display: all orders fields; include address street, city, state, and zip for the order; include user's name.  Then sum the total amount spent at the bottom for only the selected orders.  Amount fields must have a dollar sign and proper commas and formatting.</p>
+<p>Select a user and date range to display order history.</p>
 
 <form ng-submit="getUserOrders()">
     <div>
@@ -10,18 +10,38 @@
         </label>
     </div>
     <div>
-        <ul>
-            <li ng-repeat="order in userOrders">
-                Shipping Address:</br>
-                {{order.address_street}}</br>
-                {{order.address_city}}, {{order.address_state}} &nbsp {{order.address_zip}}</br>
-                </br>
-                <ul>
-                    <li>Order Number: {{order.order_id}}</li>
-                    <li>Order Date: {{order.order_date}}</li>
-                    <li>Order Amount: {{order.amount}}</li>
-                </ul>
-            </li>
-        </ul>
+        <label>Start Date: </label>
+        <input type="date" id="minDate" name="minInput" ng-model="minDate.value"
+               placeholder="yyyy-MM-dd" required />
+        <label>End Date: </label>
+        <input type="date" id="maxDate" name="maxInput" ng-model="maxDate.value"
+               placeholder="yyyy-MM-dd" required />
+        <div role="alert">
+            <span class="error" ng-show=""></span>
+        </div>
+    </div>
+    <div>
+        <table>
+            <tr>
+                <th>User</th>
+                <th>Shipping Address</th>
+                <th>Address Type</th>
+                <th>Order No.</th>
+                <th>Order Date</th>
+                <th>Order Amount</th>
+            </tr>
+            <tr ng-repeat="order in userOrders">
+                <td>{{order.name}}</td>
+                <td>{{order.address_street}}</br>
+                {{order.address_city}}, {{order.address_state}} &nbsp {{order.address_zip}}</td>
+                <td>{{order.address_type}}</td>
+                <td>{{order.order_id}}</td>
+                <td>{{order.order_date | date: 'MM/dd/yyyy'}}</td>
+                <td>{{order.amount | currency}}</td>
+            </tr>
+        </table>
+    </div>
+    <div>
+        <label>Order(s) Grand Total: {{orderTotal | currency}}</label>
     </div>
 </form>
