@@ -1,13 +1,22 @@
-body {
-    color: red;
-    font-family: "Helvetica", "Arial", sans-serif;
-}
+/*body {*/
+    /*color: red;*/
+    /*font-family: "Helvetica", "Arial", sans-serif;*/
+/*}*/
 
 p {
     color: #0d3349;
+    font-size: 1em;
 }
 
-table, th, td {
+table, td {
+    border: 1px solid grey;
+    border-collapse: collapse;
+    padding: 5px;
+}
+
+th {
+    background-color: black;
+    color: white;
     border: 1px solid grey;
     border-collapse: collapse;
     padding: 5px;

@@ -1,4 +1,4 @@
-<p>Select user to display user address(es) on file.</p>
+<h2>Select a user to display the users address(es) on file.</h2>
 
 <form ng-submit="getUserAddresses()">
     <div>
@@ -9,15 +9,26 @@
             <input type="submit" id="submit" value="Submit" />
         </label>
     </div>
-    <div>
-        <ul>
-            <li ng-repeat="address in userAddresses">
+    <!--<div>-->
+        <!--<ul>-->
+            <!--<li ng-repeat="address in userAddresses">-->
+                <!--Name: {{address.name}}</br>-->
+                <!--Address: {{address.address_street}}</br>-->
+                <!--&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp-->
+                <!--{{address.address_city}}, {{address.address_state}} &nbsp {{address.address_zip}}</br>-->
+                <!--Address Type: {{address.address_type}}</br>-->
+            <!--</li>-->
+        <!--</ul>-->
+    <!--</div>-->
+    <div class="well col-md-4" ng-repeat="address in userAddresses">
+        <p>
+            <span>
                 Name: {{address.name}}</br>
-                Address: {{address.address_street}}</br>
-                &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
-                {{address.address_city}}, {{address.address_state}} &nbsp {{address.address_zip}}</br>
                 Address Type: {{address.address_type}}</br>
-            </li>
-        </ul>
+                </br>
+                {{address.address_street}}</br>
+                {{address.address_city}}, {{address.address_state}} &nbsp {{address.address_zip}}</br>
+            </span>
+        </p>
     </div>
 </form>
